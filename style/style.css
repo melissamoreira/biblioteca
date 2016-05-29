@@ -1,0 +1,90 @@
+body {
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+}    
+
+header {
+    position: absolute;
+    top: 0px;
+    height: 120px;    
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    line-height:120%;
+    margin-top: 20px;
+    color: #000;
+    transition: 0.5s;
+}
+
+
+h1>span {
+    font-weight: 900;
+    font-size: 2.1em;
+    border-bottom: 1.8px solid #fff;
+}
+
+h1:hover {
+    color: #fff;
+    transition: 0.5s;
+}
+
+h2 {
+    margin-top: 200px;
+    font-size: 2.5em;
+    font-family: Roboto, sans-serif;
+    font-weight: 200;
+    text-align: center;
+}
+
+.container {
+    margin: 5% auto 5% auto;
+    width: 100%;
+    padding: 5% 5%  5% 5%;
+}
+
+.card-panel {
+    margin: 5% 3.8% 5% 3.8% !important; 
+    font-size: 1.7em;
+    border-bottom: 3px solid #26a69a;
+    transition: 0.5s;
+}
+
+.card-panel:hover {
+    border-bottom: 3px solid #fff;
+    background-color: #009688 !important;
+    transition: 0.5s;
+}
+
+.opcoes {
+    margin-top: 50px;
+}
+
+.principal {
+    padding-left: 18%;    
+}
+
+.collapsible.col {
+    padding: 0 0 0 0;
+}
+
+.collapsible-header>h3 {
+    font-size: 1.8em;
+    margin: 0 0 0 0;
+    padding: 2% 0 2% 0;
+}
+
+.collapsible-body {
+    padding: 5% 0 5% 0;
+    background-color: #26a69a;
+}
+
+.campo-pesquisa,
+.campo-pesquisa>input {
+    background-color: #26a69a;
+    color: #fff;
+}
