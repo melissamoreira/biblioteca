@@ -87,6 +87,8 @@
                 </div>
             </div>
             
+            <div id="resultado"></div>
+            
             
         </main>
         
@@ -94,41 +96,30 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
         <script>
-           /*
+           
            $(document).ready(function(){
-
-                $('input').hide();
-                $('input').next().hide();
                
-               var mostra = function(button, campo){
-                   button.click(function(){
-                       campo.show();
-                       campo.next().show();
-                       campo.next().next().hide();
-                       campo.next().next().next().hide();
-                       campo.prev().hide();
-                       campo.prev().prev().hide();
-                       
-                       campo.blur(function(){
-                           if(campo.val()=="")
-                               campo.hide();
-                               campo.next().hide();
-                       });
-                       button.click(function(){
-                           campo.hide();
-                           campo.next().hide();
-                           mostra(button, campo);
-                        })
-                   })
-               };
-               
-               mostra($('#b1'),$('#pesquisa-titulo'));
-               mostra($('#b2'),$('#pesquisa-cod-livro'));
-               mostra($('#b3'),$('#pesquisa-nome'));
-               mostra($('#b4'),$('#pesquisa-cod-leitor'));
-               
-           })
-           */
+                //GET: Consultando Livro por Título
+                var codigo = $("#pesquisa-cod-livro").val();
+                $("button:eq(1)").click(function(){
+                    
+                    var sucesso = function(result){
+                        
+                        alert("TUDO OKAY!");
+                        $("#resultado").html(result.response);
+                        //'resp' vêm do resultado em json, do Response Body
+                    };
+                        
+                    //Usando o AJAX via jQuery: Envia um objeto JSON(JavaScript Object Notation)
+                    var obj = { url: "https://web-service-melissamoreira.c9users.io/livro/"+codigo, //A URL chama o método GET do GeneralResourceGET
+                                type:"GET", 
+                                success: sucesso,
+                                error: alert("DEU RUIM!")
+                    }; //Atribui a var 'sucesso' ao valor da chave success do objeto
+                        
+                    $.ajax(obj);
+                });
+           });
             
         </script>
         
