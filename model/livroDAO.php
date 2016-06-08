@@ -15,23 +15,27 @@ class LivroDAO{
             echo "Falha no MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
         
-        $stmt = $mysqli->prepare("INSERT INTO Livro( titulo, autor, editora, edicao,
-        categoria, disponibilidade, quantidade) VALUES (?,?,?,?,?,?,?,?)");
+        //print_r($livro);
+        //print_r($mysqli);
         
-        $stmt->bind_param("sssissi",
-                                $livro->titulo, 
-                                $livro->autor, 
+        $stmt = $mysqli->prepare("INSERT INTO Livro VALUES (?,?,?,?,?,?,?,?)");
+        //var_dump($stmt);
+        //exit();
+        
+        $stmt->bind_param('isssissi',
+                                $livro->codigo,
+                                $livro->titulo,
+                                $livro->autor,
                                 $livro->editora,
-                                $livro->edicao, 
-                                $livro->categoria, 
-                                $livro->disponibilidade, 
+                                $livro->edicao,
+                                $livro->categoria,
+                                $livro->disponibilidade,
                                 $livro->quantidade);
         
         if (!$stmt->execute()) {
         
             echo "ERRO: (" . $stmt->errno . ") " . $stmt->error . "<br>";
         }
-        
         $stmt->close();
     }
     

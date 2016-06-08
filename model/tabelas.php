@@ -18,7 +18,7 @@ class Livro{
             $quantidade; 
     
     //Construtor
-    public function __construct( $codigo, $titulo, $autor, $editora, $edicao, $categoria, 
+    public function __construct( $codigo=0, $titulo, $autor, $editora, $edicao, $categoria, 
             $disponibilidade, $quantidade){
         
         $this->codigo           = $codigo;

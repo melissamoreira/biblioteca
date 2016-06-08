@@ -69,7 +69,7 @@
                     
                     <div class="select-dropdown col s10 m6">        
                         <label for="categoria">Categorias: </label>
-                        <select name="categorias" class="multiple-select-dropdown" multiple> 
+                        <select name="categorias" name="categorias[]" id="categorias" class="multiple-select-dropdown" multiple> 
                           <option value="" disabled selected>Selecione a(s) categoria(s)</option>
                           <option value="1">Literatura Nacional</option>
                           <option value="2">Literatura Estrangeira</option>
@@ -87,12 +87,10 @@
                              <span class="lever"></span> Sim </label>
                         </div>
                     </div>  
-                    
-                    <div class="input-field col s12 m12 l12">
-                        <button class="btn waves-effect waves-light btn-large" type="submit" class>Enviar <i class="material-icons right">send</i></button>
-                    </div>
-                            
                 </form>
+                <div class="input-field col s12 m12 l12">
+                    <button class="btn waves-effect waves-light btn-large" onclick="cadastrarLivro()">Enviar <i class="material-icons right">send</i></button>
+                </div>
                 <br><br>
                 
                
@@ -105,10 +103,98 @@
         <!-- jQuery and Materialize -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+        
+        <!-- Ajax Requests  -->
+        <script type="text/javascript" src="js/scripts.js"></script>
         <script>
-            $(document).ready(function() {
+        
+              $(document).ready(function(){
+                
+                //Select do Materialize  
                 $('select').material_select();
-              });
+               
+                //POST: Cadastrando livro no banco
+                $(".submit").click(function(){
+                    
+                    var sucesso = function(result){
+                        
+                        alert("SUCESSO!");
+                        window.location="home.php";
+                        //$("#resultado").html(result.response);
+                        //'resp' vêm do resultado em json, do Response Body
+                    };
+                    
+                    var erro = function(result){
+                        
+                        alert("DEU RUIM!" + result.response);
+                        $("#resultado").html(result.response);
+                    };
+                    
+                        
+                    //Usando o AJAX via jQuery: Envia um objeto JSON(JavaScript Object Notation)
+                    var obj = { url: "https://web-service-melissamoreira.c9users.io/livro", //A URL chama o método GET do GeneralResourceGET
+                                method: "POST",
+                                //type:"POST", 
+                                success: sucesso,
+                                error: erro
+                    };
+                        
+                    $.ajax(obj);
+                });
+           });
+              
+            
+            
+            
+            
+            
+            
+            function confirmar(){
+			
+            $.ajax({
+                 contentType: "application/json",
+                 url: "@{EventoR}",
+                 type: "POST",
+                 data: JSON.stringify({"descricao":$("#descricao").val(), 
+                                       "percentualDesconto":parseInt($("#desconto").val()),
+                                       "contratoid":parseInt($("#contratoid").val()) }),
+                 success: function(){
+                	
+					limpaCampos();	
+					listar();
+                 },
+                 error: function(){
+                 	alert("ERRO!");
+                 }
+            });
+        	ajuste();
+        	$('tbody tr').css('background-color','#fff');   
+		}
+
+		function confedit(){
+    		modeledt.descricao = $("#descricao").val();
+    		modeledt.percentualDesconto = parseInt($("#desconto").val());
+    		modeledt.contratoid = parseInt($("#contratoid").val());
+        		$.ajax({
+            		type: "PUT",
+            		dataType: "json",
+            		cache: false,
+		            contentType:"application/json",    
+        		    url: 'https://estacionamento-bruno-alcamin.c9users.io/alteraevento/'+modeledt.id,
+            		data: JSON.stringify(modeledt),  
+        		}).done(function(e){
+           			limpaCampos();	
+       				$("#tb").html("");
+       				listar();
+        		});
+        		ajusteEdit();
+		}
+            
+            
+            
+              
+              
+              
         </script>
         
     </body>
