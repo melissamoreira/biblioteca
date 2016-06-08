@@ -1,21 +1,22 @@
 //================================= Cadastrar Livro =================================
 
 function cadastrarLivro(){
+    
+    //Ajuste Disponibilidade
     var disp;
-    if($("#disponibilidade").val() == 'on'){
+    if($("#disponibilidade").val() == 'on'){ 
         disp = 'S';
     } else {
         disp = 'N';
     }
-    var categoria="";
+    
+    //Ajuste Categorias
     var cat = $('#categorias').val();
-    for(var i=0; i<cat.length; i++){
-        categoria += String(cat[i])+" "; 
-    }
     cat = cat.reduce(function(x,y){
         return String(x)+" "+y;
     },"");
     
+    //Requisição
     $.ajax({
         contentType: "application/json",
         url: "https://web-service-melissamoreira.c9users.io/livro",
@@ -29,10 +30,9 @@ function cadastrarLivro(){
                               "categoria":cat,
                               "disponibilidade":disp}),
         success: function(){
-            alert("Categorias:" + cat);
             alert('Livro cadastrado com sucesso!');
             $('input').val("");
-            $('input[type="checkbox"]').removeAttr('checked');
+            $('input[type="checkbox"]').removeAttr('checked').removeClass('active');
             $('.dropdown-content li span input').removeAttr('selected');
         },
         error: function(){ alert('ERRO!'); }

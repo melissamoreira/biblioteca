@@ -15,13 +15,7 @@ class LivroDAO{
             echo "Falha no MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
         
-        //print_r($livro);
-        //print_r($mysqli);
-        
         $stmt = $mysqli->prepare("INSERT INTO Livro VALUES (?,?,?,?,?,?,?,?)");
-        //var_dump($stmt);
-        //exit();
-        
         $stmt->bind_param('isssissi',
                                 $livro->codigo,
                                 $livro->titulo,
@@ -43,7 +37,7 @@ class LivroDAO{
     public function consultaCodigo($codigo){
         $mysqli = new mysqli("127.0.0.1", "melissamoreira", "", "biblioteca");
         $stmt = $mysqli->prepare("SELECT * FROM Livro WHERE codigo=?");
-        $stmt->bind_param("i",$codigo); //'i' se refere ao tipo int, do $id
+        $stmt->bind_param("i",$codigo);
         $stmt->execute();
         $stmt->bind_result( $codigo, $titulo, $autor, $editora, $edicao, $categoria, 
                             $disponibilidade, $quantidade );
@@ -54,6 +48,5 @@ class LivroDAO{
     }
     
     //Fazer as consultas por título, autor e editora. (Retornam listas!) 
-    
     
 }

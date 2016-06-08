@@ -74,61 +74,20 @@ class GeneralResourceGET extends GeneralResource{
 class GeneralResourcePOST extends GeneralResource{
     
     public function livro(){
-<<<<<<< HEAD
-        if($_SERVER["CONTENT_TYPE"] === "application/json"){ //Aceita recebimento de conteúdo no formato JSON
-            $json = file_get_contents('php://input'); //file_get_contents <--- Função Global do PHP
-            $array = json_decode($json,true); //$json Objeto JSON que será decodificado e transformado a um array associativo
-            require_once "/model/tabelas.php"; //Importando as classes do model
-            require_once "/model/livroDAO.php";
-            $livro = new Livro(0, $array["titulo"], $array["autor"], $array["editora"], $array["edicao"], $array["categoria"], $array["disponibilidade"], $array["quantidade"]); 
-            //Criação do livro: Como o ID é um campo auto increment, o primeiro valor é 0
-            $lv = new LivroDAO();
-            $lv->insert($livro); //Insere o livro criado no livroDAO
-            echo json_encode(array("response"=>"Livro cadastrado com sucesso!"));
-            http_response_code(200);   
-=======
-        echo $_SERVER["CONTENT_TYPE"];
-        if($_SERVER["CONTENT_TYPE"] === "application/json"){ //Aceita recebimento de conteúdo no formato JSON
-            $json = file_get_contents('php://input'); //file_get_contents <--- Função Global do PHP
-            $array = json_decode($json,true); //$json Objeto JSON que será decodificado e transformado a um array associativo
-            require_once "model/tabelas.php"; //Importando as classes do model
+        if($_SERVER["CONTENT_TYPE"] === "application/json"){
+            $json = file_get_contents('php://input');
+            $array = json_decode($json,true);
+            require_once "model/tabelas.php";
             require_once "model/livroDAO.php";
             $livro = new Livro(0, $array["titulo"], $array["autor"], $array["editora"], $array["edicao"], $array["categoria"], $array["disponibilidade"], $array["quantidade"]); 
-            //Criação do livro: Como o ID é um campo auto increment, o primeiro valor é 0
             $lv = new LivroDAO();
-            $lv->insert($livro); //Insere o livro criado com o método 'inserir()' de livroDAO
+            $lv->insert($livro);
             echo json_encode(array("response"=>"Livro cadastrado com sucesso!"));
             http_response_code(200);
->>>>>>> fedb4930726e4bf8889465f97c83299a29fdcd93
         }else{
             echo json_encode(array("response"=>"Dados inválidos!"));
             http_response_code(500);   
         }
     }
-
 }
 
-<<<<<<< HEAD
-=======
-/*
-$met  = $_GET["metodo"];
-$arg1 = $_GET["arg1"];
-$arg2 = $_GET["arg2"];
-
-
-if(isset($met) && isset($arg1) && isset($arg2)){
-    $r = new Recursos($arg1,$arg2);
-    
-}elseif (isset($met) && isset($arg1)){
-    $r = new Recursos($arg1);
-    
-}elseif (isset($met)) {
-    $r = new Recursos();
-}
-
-$r->handler();
-*/
-
-//https://ide.c9.io/romefeller/aulaphp2
-
->>>>>>> fedb4930726e4bf8889465f97c83299a29fdcd93
