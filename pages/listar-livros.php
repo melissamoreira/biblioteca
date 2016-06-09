@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>Biblioteca | Cadastrar Leitor</title>
+        <title>Biblioteca | Livros</title>
         
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,100,300,300italic,700' rel='stylesheet' type='text/css'>
         
@@ -28,9 +28,9 @@
                         <!-- Dropdown Structure -->
                         <ul id='dropdown1' class='dropdown-content opcoes'>
                             <li><a href="cadastrar-livro.php">Cadastrar Livro</a></li>
-                            <li><a href="#!">Cadastrar Leitor</a></li>
+                            <li><a href="cadastrar-leitor.php">Cadastrar Leitor</a></li>
                             <li><a href="consulta.php">Realizar Consulta</a></li>
-                            <li><a href="listar-livros.php">Listar Livros</a></li>
+                            <li><a href="#!">Listar Livros</a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,36 +38,26 @@
         </header>
         
         <main>
-            <h2>Cadastrar Leitor</h2>
+            <h2>Lista de Livros</h2>
             <div class="container brown lighten-4">
                 
                 <!-- Row -->
                 <div class="row col l9 offset-l2 m9 offset-m2">
                 
-                 <form>
-                    <div class="input-field col s10 m6">  
-                      <label for="nome">Nome: </label>
-                      <input type="text"   name="nome"    id="nome"  title="Digite o nome" required/>
-                    </div>  
-                    
-                    <div class="input-field col s10 m6">  
-                        <label for="telefone">Telefone</label>
-                        <input type="tel" name="telefone" id="telefone" title="Digite o telefone com DDD" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" />
-                    </div>
-                    
-                    <div class="input-field col s12 m12">    
-                      <label for="endereço">Endereço: </label>
-                      <input type="text"   name="endereço"   id="endereço" title="Digite o endereço" required/>
-                    </div>  
+                <table class="bordered responsive-table">
+                    <thead>
+                      <tr>
+                          <th data-field="titulo">Título</th>
+                          <th data-field="autor">Autor</th>
+                          <th data-field="editora">Editora</th>
+                          <th data-field="edicao">Edição</th>
+                          <th data-field="quantidade">Quantidade</th>
+                          <th data-field="disponibilidade">Disponibilidade</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Aqui vai a listagem de Livros -->    
 
-                    <div class="input-field col s12 m12 l12">
-                        <button class="btn waves-effect waves-light btn-large" type="submit" class>Enviar <i class="material-icons right">send</i></button>
-                    </div>
-                            
-                </form>
-                <br><br>
-                
-               
                 </div>
             </div>
             
@@ -78,11 +68,15 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
         
-        <!-- jQuery Telefone Mask -->
-        <script type="text/javascript" src="../js/jquery.mask.min.js"/></script>
-        <script type="text/javascript">
-            $("#telefone").mask("(00) 0000-00009");
+        <!-- Ajax Requests  -->
+        <script type="text/javascript" src="../js/scripts.js"></script>
+        <script>
+        
+              $(document).ready(function(){
+                listarLivros();
+              });
+              
         </script>
-
+        
     </body>
 </html>

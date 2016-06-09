@@ -52,11 +52,11 @@
                          <div class="campo-pesquisa input-field col s12 m12">     
                          <div class="row">
                             <input class="col s6 m6 l6" type="text" id="pesquisa-titulo" name="pesquisa-titulo" placeholder="Digite o título do livro"> 
-                            <button class="waves-effect waves-light btn teal lighten-3">Pesquisar por Título</button>
+                            <button id="livropn" class="waves-effect waves-light btn teal lighten-3">Pesquisar por Título</button>
                             </div>
                             <div class="row">
                             <input class="col s6 m6 l6" type="number" id="pesquisa-cod-livro" name="pesquisa-cod-livro" placeholder="Digite o código do livro"> 
-                            <button class="waves-effect waves-light btn teal lighten-3">Pesquisar por Código</button>
+                            <button id="livropc" class="waves-effect waves-light btn teal lighten-3">Pesquisar por Código</button>
                           </div>
                           </div>
                       </div>
@@ -90,6 +90,17 @@
         <!-- jQuery and Materialize -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
+        
+        <!-- Ajax Requests  -->
+        <script type="text/javascript" src="../js/scripts.js"></script>
+        
+        <script>
+            $('#livropc').click(function(){
+                var id = parseInt($('#pesquisa-cod-livro').val());
+                getLivro(id);
+            });
+            
+        </script>
         
     </body>
 </html>

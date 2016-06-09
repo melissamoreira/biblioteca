@@ -29,6 +29,7 @@
                             <li><a href="cadastrar-livro.php">Cadastrar Livro</a></li>
                             <li><a href="cadastrar-leitor.php">Cadastrar Leitor</a></li>
                             <li><a href="consulta.php">Realizar Consulta</a></li>
+                            <li><a href="listar-livros.php">Listar Livros</a></li>
                         </ul>
                     </div>
                 </div>
