@@ -27,6 +27,32 @@ class LivroDAO{
         $stmt->close();
     }
     
+    
+    // Inserir
+    public function update(Livro $livro){
+        
+        $id=$_GET['arg1'];
+        
+        $mysqli = new mysqli("127.0.0.1", "melissamoreira", "", "biblioteca");
+        if ($mysqli->connect_errno) { echo "Falha no MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error; }
+        
+        $stmt = $mysqli->prepare("UPDATE Livro SET titulo=(?), autor=(?), editora=(?), edicao=(?), categoria=(?),
+                                  disponibilidade=(?),quantidade=(?) WHERE codigo=?");
+        $stmt->bind_param('sssissii',
+                                $livro->titulo,
+                                $livro->autor,
+                                $livro->editora,
+                                $livro->edicao,
+                                $livro->categoria,
+                                $livro->disponibilidade,
+                                $livro->quantidade,
+                                $id);
+        
+        if (!$stmt->execute()) { echo "ERRO: (" . $stmt->errno . ") " . $stmt->error . "<br>"; }
+        $stmt->close();
+    }
+    
+    
     // Inserir Autor
     public function insertAutor(Livro $livro){
         

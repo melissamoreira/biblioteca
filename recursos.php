@@ -60,7 +60,7 @@ class GeneralResourcePOST extends GeneralResource{
             $livro = new Livro(0, $array["titulo"], $array["autor"], $array["editora"], $array["edicao"], $array["categoria"], $array["disponibilidade"], $array["quantidade"]); 
             $lv = new LivroDAO();
             $lv->insert($livro);      //Inserir Livro
-            $lv->insertAutor($livro); //Inserir Autor
+            //$lv->insertAutor($livro); //Inserir Autor
             echo json_encode(array("response"=>"Livro cadastrado com sucesso!"));
             http_response_code(200);
         }else{
@@ -79,5 +79,25 @@ class GeneralResourceDELETE extends GeneralResource{
         $lv->delete($id);
         echo json_encode(array("response"=>"Livro excluido com sucesso!"));
         http_response_code(200);
+    }
+}
+
+class GeneralResourcePUT extends GeneralResource{
+    
+    public function livro(){
+        if($_SERVER["CONTENT_TYPE"] === "application/json"){
+            $json = file_get_contents('php://input');
+            $array = json_decode($json,true);
+            require_once "model/tabelas.php";
+            require_once "model/livroDAO.php";
+            $livro = new Livro(0, $array["titulo"], $array["autor"], $array["editora"], $array["edicao"], $array["categoria"], $array["disponibilidade"], $array["quantidade"]); 
+            $lv = new LivroDAO();
+            $lv->update($livro);
+            echo json_encode(array("response"=>"Livro editado com sucesso!"));
+            http_response_code(200);
+        }else{
+            echo json_encode(array("response"=>"Dados inválidos!"));
+            http_response_code(500);   
+        }
     }
 }
