@@ -54,7 +54,7 @@ class LivroDAO{
     public function delete($id){
         $mysqli = new mysqli("127.0.0.1", "melissamoreira", "", "biblioteca");
         if ($mysqli->connect_errno) { echo "Falha no MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error; }
-        $stmt = $mysqli->prepare("DELETE FROM Livro WHERE id=?");
+        $stmt = $mysqli->prepare("DELETE FROM Livro WHERE codigo=?");
         $stmt->bind_param("i",$id);
         if (!$stmt->execute()) { echo "ERRO: (" . $stmt->errno . ") " . $stmt->error . "<br>"; }
         $stmt->close();

@@ -72,12 +72,12 @@ class GeneralResourcePOST extends GeneralResource{
 
 class GeneralResourceDELETE extends GeneralResource{
     
-    public function livro($id){
-        require_once "model/tabelas.php";
+    public function livro(){
+        $id = $_GET['arg1'];
         require_once "model/livroDAO.php";
         $lv = new LivroDAO();
         $lv->delete($id);
-        echo json_encode(array("response"=>"Livro excluído com sucesso!"));
+        echo json_encode(array("response"=>"Livro excluido com sucesso!"));
         http_response_code(200);
     }
 }
