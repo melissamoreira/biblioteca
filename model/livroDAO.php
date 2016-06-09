@@ -110,20 +110,14 @@ class LivroDAO{
         $mysqli = new mysqli("127.0.0.1", "melissamoreira", "", "biblioteca");
         if ($mysqli->connect_errno) { echo "Falha no MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error; }
         
-        $stmt = $mysqli->prepare("SELECT * FROM Livro");
-        //$stmt->bind_param("i", $codigo);
-        
-        $stmt->execute();
-        $stmt->bind_result( $codigo, $titulo, $autor, $editora, $edicao, $categoria, 
-                            $disponibilidade, $quantidade );
-                            
-        $resultado = $stmt->fetch_all();
-        $resultado = count($resultado);
+        $stmt = $mysqli->query("SELECT * FROM Livro");
         $livros = [];
-        
-        for($i=0; $i<$resultado; $i++){
-            $livros[$i] = new Livro( $resultado[$i]['codigo'], $resultado[$i]['titulo'], $resultado[$i]['autor'], $resultado[$i]['editora'], 
-                                     $resultado[$i]['edicao'], $resultado[$i]['categoria'], $resultado[$i]['disponibilidade'], $resultado[$i]['quantidade'] );
+
+        for($i=0; $resultado=$stmt->fetch_assoc(); $i++){
+            
+            $livros[$i] = new Livro ( $resultado['codigo'], $resultado['titulo'], $resultado['autor'], 
+                                      $resultado['editora'], $resultado['edicao'], $resultado['categoria'], 
+                                      $resultado['disponibilidade'], $resultado['quantidade'] );
         }
         return $livros;
     }

@@ -41,12 +41,22 @@ class GeneralResourceGET extends GeneralResource{
     }  
     
     public function lista(){
+        require_once "model/tabelas.php";
         require_once "model/livroDAO.php";
         $lv = new LivroDAO();
-        return $livros = $lv->listar();
+        $resultado = $lv->listar();
+        foreach ($resultado as $resultado) {
+           $list[] = array( "titulo"=>$resultado->titulo, 
+                            "autor"=>$resultado->autor, 
+                            "editora"=>$resultado->editora, 
+                            "edicao"=>$resultado->edicao, 
+                            "categoria"=>$resultado->categoria, 
+                            "disponibilidade"=>$resultado->disponibilidade,
+                            "quantidade"=>$resultado->quantidade );
+        }
+        echo json_encode($list);
         http_response_code(200);
     }
-    
 }
 
 class GeneralResourcePOST extends GeneralResource{
